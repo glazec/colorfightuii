@@ -5,7 +5,6 @@ const startx=20 //larger than r
 const starty=30 //larger than 2*r
 const interval=2.1 //must larger than2
 var graphics
-var colorfight
 var ws
 const bg="#FFFFFF"
 
@@ -40,6 +39,8 @@ function preload ()
 function create ()
 {
     graphics=this.add.graphics();
+    naturalCost()
+    fieldCost()
     url="wss://colorfightii.herokuapp.com/game_channel"
     ws = new WebSocket(url); 
     // var circle = new Phaser.Geom.Circle(300, 300, 200);
@@ -88,7 +89,9 @@ function update(){
         console.log('refresh')
         graphics.clear()
         colorfight = JSON.parse(evt.data);
-        draw()
+        draw(colorfight)
+        naturalCost()
+        fieldCost()
     //     for(i=0;i<colorfight.length;i++){
     //         // mapChange(colorfight.game_map[i])
     //         for(j=0;j<colorfight.game_map[i].length;j++)
@@ -133,19 +136,22 @@ function alphaAttack(cost){
 
 
 
-function draw(){
+function draw(colorfight){
     for(i=0;i<=29;i++){
         for(j=0;j<=29;j++){
             let position=colorfight.game_map[i][j].position
-            var c = new Phaser.Geom.Rectangle(startx+(position[0])*r*interval,10+(position[1])*r*interval,r,r);
-            // shadow(startx+(position[0])*r*interval,10+(position[1])*r*interval,c)
-            // graphics.fillStyle(colorPlatte[colorfight.game_map[i][j].owner],alphaAttack(colorfight.game_map[i][j].attack_cost)).fillCircleShape(c)
-            graphics.fillStyle(colorPlatte[colorfight.game_map[i][j].owner],alphaAttack(colorfight.game_map[i][j].attack_cost))
-            graphics.fillRectShape(c)
-            let energy=colorfight.game_map[i][j].energy
-            let gold=colorfight.game_map[i][j].gold
-            graphics.lineStyle(1+(energy/10), '#6288d1', 10);   // color: 0xRRGGBB
-            graphics.strokeRectShape(c);
+            var c = new Phaser.Geom.Circle(startx+(position[0])*r*interval,10+(position[1])*r*interval,r,r);
+            shadow(startx+(position[0])*r*interval,10+(position[1])*r*interval,c)
+            graphics.fillStyle(colorPlatte[colorfight.game_map[i][j].owner],alphaAttack(colorfight.game_map[i][j].attack_cost)).fillCircleShape(c)
+            
+            // #region rect
+            // graphics.fillStyle(colorPlatte[colorfight.game_map[i][j].owner],alphaAttack(colorfight.game_map[i][j].attack_cost))
+            // graphics.fillRectShape(c)
+            // let energy=colorfight.game_map[i][j].energy
+            // let gold=colorfight.game_map[i][j].gold
+            // graphics.lineStyle(1+(energy/10), '#6288d1', 10);   // color: 0xRRGGBB
+            // graphics.strokeRectShape(c);
+            // #endregion
 }}}
 
 function test(){
@@ -164,6 +170,47 @@ function test(){
     
 }; 
 
+function naturalCost(){
+ 
+    //red hp radius
+    // hpRadius(startx+1*r*interval,10+1*r*interval,0,360,'0xb71c1c')
+    // green hp
+    // hpRadius(startx+1*r*interval,10+1*r*interval,-90,(-90+87),'0x1B5E20')
+    hpRadius(startx+1*r*interval,10+1*r*interval,-90,(-90+87),'0xb71c1c')
+
+    
+    //blue filed force
+}
+
+function fieldCost(){
+    fieldRadius(startx+1*r*interval,10+1*r*interval,(-90+270))
+}
+
+function hpRadius(x,y,startAngle=0,endAngle=360,color){
+    //lineStyle (width,color,alpha)
+    graphics.lineStyle(1.5, color, 1);
+    graphics.beginPath();
+    // arc (x, y, radius, startAngle, endAngle, anticlockwise)
+    graphics.arc(startx+1*r*interval,10+1*r*interval,r, Phaser.Math.DegToRad(startAngle), Phaser.Math.DegToRad(endAngle), false);
+    
+    // graphics.arc(startx+1*r*interval,10+1*r*interval, r, (startAngle), (endAngle), false);
+
+    graphics.strokePath();
+
+}
+
+function fieldRadius(x,y,endAngle){
+        //lineStyle (width,color,alpha)
+        graphics.lineStyle(1, '0x80DEEA1', 0.75);
+        graphics.beginPath();
+        // arc (x, y, radius, startAngle, endAngle, anticlockwise)
+        graphics.arc(startx+1*r*interval,10+1*r*interval, 1.1*r, Phaser.Math.DegToRad(-90), Phaser.Math.DegToRad(endAngle), false);
+        // graphics.arc(startx+1*r*interval,10+1*r*interval, r, (startAngle), (endAngle), false);
+    
+        graphics.strokePath();
+    
+}
+
 
 function color (i)
 {
@@ -176,4 +223,23 @@ function shadow(x,y,shape){
         graphics.fillStyle(0x000000,0).fillCircleShape(c1)
 }
 
+//use before hp and mp
+function gold(){
 
+            // graphics.fillStyle(colorPlatte[colorfight.game_map[i][j].owner],alphaAttack(colorfight.game_map[i][j].attack_cost))
+            // graphics.fillRectShape(c)
+            // let energy=colorfight.game_map[i][j].energy
+            // let gold=colorfight.game_map[i][j].gold
+            // graphics.lineStyle(1+(energy/10), '#6288d1', 10);   // color: 0xRRGGBB
+            // graphics.strokeRectShape(c);
+
+}
+
+function energy(){
+
+}
+
+function halfCircle(x,y,percentage){
+    //the center of the circle to the new point
+    let offset=r-r/Math.sqrt(percentage)
+}
