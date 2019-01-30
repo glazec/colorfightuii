@@ -13,8 +13,9 @@ Todo:
   ☐ resolution
   ☐ display gold
   ☐ display enery
-  ☐ display natural cost
-  ☐ display force field
+  ✔ display natural cost @done(19-01-29 19:02)
+  ✔ display force field @done(19-01-29 19:02)
   ✔ seperate html and js @high @done(19-01-28 20:50)
   ☐ fix the bug owner may be letter @high 
-  
+  ☐ AMP @low 
+  ☐ display attack cost @high 
