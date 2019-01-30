@@ -153,15 +153,15 @@ function draw(colorfight){
             var c = new Phaser.Geom.Circle(absolutex,absolutey,r);
             // shadow(startx+(position[0])*r*interval,10+(position[1])*r*interval,c)
             graphics.fillStyle(colorPlatte[colorfight.game_map[i][j].owner],alphaAttack(colorfight.game_map[i][j].attack_cost)).fillCircleShape(c)
-            // naturalCost(absolutex,absolutey,natural)
-            // fieldCost(absolutex,absolutey,field)
-            // goldGraph(absolutex,absolutey,gold)
-            // energyGraph(absolutex,absolutey,energy)
+            naturalCost(absolutex,absolutey,natural)
+            fieldCost(absolutex,absolutey,field)
+            goldGraph(absolutex,absolutey,gold)
+            energyGraph(absolutex,absolutey,energy)
 
-            naturalCost(absolutex,absolutey,300)
-            fieldCost(absolutex,absolutey,700)
-            goldGraph(absolutex,absolutey,7)
-            energyGraph(absolutex,absolutey,7)
+            // naturalCost(absolutex,absolutey,300)
+            // fieldCost(absolutex,absolutey,700)
+            // goldGraph(absolutex,absolutey,7)
+            // energyGraph(absolutex,absolutey,7)
             
             // #region rect
             // graphics.fillStyle(colorPlatte[colorfight.game_map[i][j].owner],alphaAttack(colorfight.game_map[i][j].attack_cost))
