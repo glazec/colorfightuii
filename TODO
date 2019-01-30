@@ -19,3 +19,4 @@ Todo:
   ☐ fix the bug owner may be letter @high 
   ☐ AMP @low 
   ☐ display attack cost @high 
+  ☐ bond arcline with smaller (endAngle-StartAngle),larger interval between two lines
