@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -18,16 +22,18 @@
                 <div class="col">
                     <a href="#" class="brand-logo blue-grey-text text-lighten-2">Color Fight</a>
                 </div>
-
+            <!-- <div class="row"><p></p></div> -->
+            <div class="row">
                 <div class="col offset-s1">
-                    <p class="blue-text text-darken-1">this is a timer</p>
+                    <p class="blue-text text-darken-1" id="timer">Turn</p>
                 </div>
             </div>
+        </div>
            <!-- <span class=" grey-text darken-4 valign-wrapper "><h5 class="nav-text">Color Fight</h5></span> -->
         </div>
     </nav>
     <div class="container">
-        <div id='game' class="card-panel hoverable">
+        <div id='game' class="card-panel" >
              <script src="./map.js"></script>
         </div>
         
