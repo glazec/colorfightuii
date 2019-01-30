@@ -20,8 +20,8 @@ var colorfight
 
 var config = {
     type: Phaser.AUTO,
-    width: (startx+grid*r*interval)+1.1*r,
-    height: (10+grid*r*interval)+1.1*r,
+    width: (startx+grid*r*interval)+3.5+r,
+    height: (10+grid*r*interval)+r+3.5,
     backgroundColor:bg,
     parent:document.getElementById('game'),
     // "render.transparent": true,
@@ -153,15 +153,15 @@ function draw(colorfight){
             var c = new Phaser.Geom.Circle(absolutex,absolutey,r);
             // shadow(startx+(position[0])*r*interval,10+(position[1])*r*interval,c)
             graphics.fillStyle(colorPlatte[colorfight.game_map[i][j].owner],alphaAttack(colorfight.game_map[i][j].attack_cost)).fillCircleShape(c)
-            naturalCost(absolutex,absolutey,natural)
-            fieldCost(absolutex,absolutey,field)
-            goldGraph(absolutex,absolutey,gold)
-            energyGraph(absolutex,absolutey,energy)
+            // naturalCost(absolutex,absolutey,natural)
+            // fieldCost(absolutex,absolutey,field)
+            // goldGraph(absolutex,absolutey,gold)
+            // energyGraph(absolutex,absolutey,energy)
 
-            // naturalCost(absolutex,absolutey,700)
-            // fieldCost(absolutex,absolutey,700)
-            // goldGraph(absolutex,absolutey,7)
-            // energyGraph(absolutex,absolutey,7)
+            naturalCost(absolutex,absolutey,300)
+            fieldCost(absolutex,absolutey,700)
+            goldGraph(absolutex,absolutey,7)
+            energyGraph(absolutex,absolutey,7)
             
             // #region rect
             // graphics.fillStyle(colorPlatte[colorfight.game_map[i][j].owner],alphaAttack(colorfight.game_map[i][j].attack_cost))
@@ -198,53 +198,53 @@ function test(){
     
 }; 
 
-//right bottom red/blue
+//left bottom red/green
 function naturalCost(x,y,value){
     console.log(x,y)
-    let angle=value/1000*90
-    let endAngle=90-angle
-    // hpRadius(x,y,-90,(-90+angle),'0xb71c1c')
-    graphics.lineStyle(1.5, '0xb71c1c', 0.9);
-    graphics.beginPath();
-    graphics.arc(x,y,r, Phaser.Math.DegToRad(90), Phaser.Math.DegToRad(endAngle), true);
-    graphics.strokePath();    
-    //blue filed force
-}
-
-//left bottom gold
-function goldGraph(x,y,value){
-    console.log(x,y)
-    let angle=value/10*90
+    let angle=value/1000*180
     let endAngle=90+angle
     // hpRadius(x,y,-90,(-90+angle),'0xb71c1c')
-    graphics.lineStyle(1.5, '0xf9a825', 0.9);
+    graphics.lineStyle(1.5, '0xef5350', 1);
     graphics.beginPath();
     graphics.arc(x,y,r, Phaser.Math.DegToRad(90), Phaser.Math.DegToRad(endAngle), false);
     graphics.strokePath();    
-
+    //blue filed force
 }
-
-//rightup blue
+// blue
 function fieldCost(x,y,value){
-    let angle=value/1000*90
-    let endAngle=-90+angle
-    graphics.lineStyle(1.5, '0x00796b', 0.9);
+    let angle=value/1000*180
+    let endAngle=90+angle
+    graphics.lineStyle(1, '0x1A237E', 0.9);
     graphics.beginPath();
     // arc (x, y, radius, startAngle, endAngle, anticlockwise)
-    graphics.arc(x,y, r, Phaser.Math.DegToRad(-90), Phaser.Math.DegToRad(endAngle), false);
+    graphics.arc(x,y, 2.5+r, Phaser.Math.DegToRad(90), Phaser.Math.DegToRad(endAngle), false);
     // graphics.arc(startx+1*r*interval,10+1*r*interval, r, (startAngle), (endAngle), false);
 
     graphics.strokePath();
 }
 
-//leftup purple
+//left gold
+function goldGraph(x,y,value){
+    console.log(x,y)
+    let angle=value/10*180
+    let endAngle=90-angle
+    // hpRadius(x,y,-90,(-90+angle),'0xb71c1c')
+    graphics.lineStyle(1.5, '0xFF8F00', 1);
+    graphics.beginPath();
+    graphics.arc(x,y,r, Phaser.Math.DegToRad(90), Phaser.Math.DegToRad(endAngle), true);
+    graphics.strokePath();    
+
+}
+
+
+//purple
 function energyGraph(x,y,value){
     let angle=value/10*90
-    let endAngle=-90-angle
+    let endAngle=90-angle
     // hpRadius(x,y,-90,(-90+angle),'0xb71c1c')
-    graphics.lineStyle(1.5, '0x9c27b0', 0.9);
+    graphics.lineStyle(1, '0x673AB7', 0.9);
     graphics.beginPath();   
-    graphics.arc(x,y,r, Phaser.Math.DegToRad(-90), Phaser.Math.DegToRad(endAngle), true);
+    graphics.arc(x,y,r+2.5, Phaser.Math.DegToRad(90), Phaser.Math.DegToRad(endAngle), true);
     graphics.strokePath(); 
 }
 
