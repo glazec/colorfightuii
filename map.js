@@ -94,6 +94,7 @@ function update(){
         graphics.clear()
         colorfight = JSON.parse(evt.data);
         draw(colorfight)
+        timer(colorfight)
         // coverLayer(startx+1*r*interval,10+1*r*interval,80)
     //     for(i=0;i<colorfight.length;i++){
     //         // mapChange(colorfight.game_map[i])
@@ -197,6 +198,10 @@ function test(){
     // setTimeout(function(){ console.log("refresh"); }, 3000);
     
 }; 
+
+function timer(colorfight){
+    $('#timer').text('Turn: '+colorfight.turn)
+}
 
 //left bottom red/green
 function naturalCost(x,y,value){
