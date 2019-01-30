@@ -1,7 +1,7 @@
 const colorPlatte=['0xb0bec5','0xdd2c00','0xffd600','0xffab00','0xff6d00','0xaeea00','0x64dd17','#00c853']; //700
 const goldColor=['0xfffde7','0xfff9c4','0xfff59d','0xfff176','0xffee58','0xffeb3b','0xfdd835','0xfbc02d','0xf9a825','0xf57f17']
 const energyColor = []
-const r = 8
+const r = 10
 const grid =29
 const startx=20 //larger than r
 const starty=30 //larger than 2*r
@@ -148,12 +148,20 @@ function draw(colorfight){
             let field=colorfight.game_map[i][j].force_field
             let natural=colorfight.game_map[i][j].natural_cost
             let gold=colorfight.game_map[i][j].gold
+            let energy=colorfight.game_map[i][j].energy
 
             var c = new Phaser.Geom.Circle(absolutex,absolutey,r);
             // shadow(startx+(position[0])*r*interval,10+(position[1])*r*interval,c)
             graphics.fillStyle(colorPlatte[colorfight.game_map[i][j].owner],alphaAttack(colorfight.game_map[i][j].attack_cost)).fillCircleShape(c)
-            naturalCost(absolutex,absolutey,natural,gold)
+            naturalCost(absolutex,absolutey,natural)
             fieldCost(absolutex,absolutey,field)
+            goldGraph(absolutex,absolutey,gold)
+            energyGraph(absolutex,absolutey,energy)
+
+            // naturalCost(absolutex,absolutey,700)
+            // fieldCost(absolutex,absolutey,700)
+            // goldGraph(absolutex,absolutey,7)
+            // energyGraph(absolutex,absolutey,7)
             
             // #region rect
             // graphics.fillStyle(colorPlatte[colorfight.game_map[i][j].owner],alphaAttack(colorfight.game_map[i][j].attack_cost))
@@ -190,53 +198,56 @@ function test(){
     
 }; 
 
-function naturalCost(x,y,value,gold){
+//right bottom red/blue
+function naturalCost(x,y,value){
     console.log(x,y)
-    let angle=value/1000*360
-    let endAngle=-90+angle
+    let angle=value/1000*90
+    let endAngle=90-angle
     // hpRadius(x,y,-90,(-90+angle),'0xb71c1c')
-    graphics.lineStyle(1.5, goldColor[Math.floor(gold/2)+4], 1);
+    graphics.lineStyle(1.5, '0xb71c1c', 0.9);
     graphics.beginPath();
-    graphics.arc(x,y,r, Phaser.Math.DegToRad(0), Phaser.Math.DegToRad(endAngle), false);
+    graphics.arc(x,y,r, Phaser.Math.DegToRad(90), Phaser.Math.DegToRad(endAngle), true);
     graphics.strokePath();    
     //blue filed force
 }
 
-function fieldCost(x,y,value){
-    let angle=value/1000*360
-    fieldRadius(x,y,(-90+angle))
+//left bottom gold
+function goldGraph(x,y,value){
+    console.log(x,y)
+    let angle=value/10*90
+    let endAngle=90+angle
+    // hpRadius(x,y,-90,(-90+angle),'0xb71c1c')
+    graphics.lineStyle(1.5, '0xf9a825', 0.9);
+    graphics.beginPath();
+    graphics.arc(x,y,r, Phaser.Math.DegToRad(90), Phaser.Math.DegToRad(endAngle), false);
+    graphics.strokePath();    
+
 }
 
-function hpRadius(x,y,endAngle=360,color){
-    //lineStyle (width,color,alpha)
-    graphics.lineStyle(1.5, color, 1);
+//rightup blue
+function fieldCost(x,y,value){
+    let angle=value/1000*90
+    let endAngle=-90+angle
+    graphics.lineStyle(1.5, '0x00796b', 0.9);
     graphics.beginPath();
     // arc (x, y, radius, startAngle, endAngle, anticlockwise)
-    graphics.arc(x,y,r, Phaser.Math.DegToRad(0), Phaser.Math.DegToRad(endAngle), false);
-    
+    graphics.arc(x,y, r, Phaser.Math.DegToRad(-90), Phaser.Math.DegToRad(endAngle), false);
     // graphics.arc(startx+1*r*interval,10+1*r*interval, r, (startAngle), (endAngle), false);
 
     graphics.strokePath();
-
 }
 
-function fieldRadius(x,y,endAngle){
-        //lineStyle (width,color,alpha)
-        graphics.lineStyle(1, '0x80DEEA1', 0.75);
-        graphics.beginPath();
-        // arc (x, y, radius, startAngle, endAngle, anticlockwise)
-        graphics.arc(x,y, 1.1*r, Phaser.Math.DegToRad(-90), Phaser.Math.DegToRad(endAngle), false);
-        // graphics.arc(startx+1*r*interval,10+1*r*interval, r, (startAngle), (endAngle), false);
-    
-        graphics.strokePath();
-    
+//leftup purple
+function energyGraph(x,y,value){
+    let angle=value/10*90
+    let endAngle=-90-angle
+    // hpRadius(x,y,-90,(-90+angle),'0xb71c1c')
+    graphics.lineStyle(1.5, '0x9c27b0', 0.9);
+    graphics.beginPath();   
+    graphics.arc(x,y,r, Phaser.Math.DegToRad(-90), Phaser.Math.DegToRad(endAngle), true);
+    graphics.strokePath(); 
 }
 
-
-function color (i)
-{
-return 0x001100 * (i % 15) + 0x000033 * (i % 5);
-}
 
 function shadow(x,y,shape){
         let c1=Phaser.Geom.Circle.Clone(shape);
@@ -245,7 +256,7 @@ function shadow(x,y,shape){
 }
 
 //use before hp and mp
-function gold(){
+// function gold(){
 
             // graphics.fillStyle(colorPlatte[colorfight.game_map[i][j].owner],alphaAttack(colorfight.game_map[i][j].attack_cost))
             // graphics.fillRectShape(c)
@@ -254,7 +265,7 @@ function gold(){
             // graphics.lineStyle(1+(energy/10), '#6288d1', 10);   // color: 0xRRGGBB
             // graphics.strokeRectShape(c);
 
-}
+// }
 
 function energy(){
 let energy=colorfight.game_map[i][j].energy
