@@ -1,7 +1,7 @@
-const colorPlatte=['0xb0bec5','0xdd2c00','0xffd600','0xffab00','0xff6d00','0xaeea00','0x64dd17','#00c853']; //700
+const colorPlatte=['0x00097a7','0xb0bec5','0xdd2c00','0xffd600','0xffab00','0xff6d00','0xaeea00','0x64dd17','#00c853']; //700
 const goldColor=['0xfffde7','0xfff9c4','0xfff59d','0xfff176','0xffee58','0xffeb3b','0xfdd835','0xfbc02d','0xf9a825','0xf57f17']
 const energyColor = []
-const r = 10
+const r = 8
 const grid =29
 const startx=20 //larger than r
 const starty=30 //larger than 2*r
@@ -154,18 +154,34 @@ function draw(colorfight){
             let gold=colorfight.game_map[i][j].gold
             let energy=colorfight.game_map[i][j].energy
 
+            resourceRender(absolutex,absolutey,gold+energy)
+}}
+
+    for(i=0;i<=29;i++){
+        for(j=0;j<=29;j++){
+            let position=colorfight.game_map[i][j].position
+            let absolutex=startx+(position[0])*r*interval
+            let absolutey=10+(position[1])*r*interval
+            let field=colorfight.game_map[i][j].force_field
+            let natural=colorfight.game_map[i][j].natural_cost
+            let gold=colorfight.game_map[i][j].gold
+            let energy=colorfight.game_map[i][j].energy
+
             var c = new Phaser.Geom.Circle(absolutex,absolutey,r);
             // shadow(startx+(position[0])*r*interval,10+(position[1])*r*interval,c)
             graphics.fillStyle(colorPlatte[colorfight.game_map[i][j].owner],alphaAttack(colorfight.game_map[i][j].attack_cost)).fillCircleShape(c)
-            naturalCost(absolutex,absolutey,natural)
-            fieldCost(absolutex,absolutey,field)
-            goldGraph(absolutex,absolutey,gold)
-            energyGraph(absolutex,absolutey,energy)
+            // resourceGraph(absolutex,absolutey,energy+gold)
+            // #region deprecated graph
+            // naturalCost(absolutex,absolutey,natural)
+            // fieldCost(absolutex,absolutey,field)
+            // goldGraph(absolutex,absolutey,gold)
+            // energyGraph(absolutex,absolutey,energy)
 
             // naturalCost(absolutex,absolutey,300)
             // fieldCost(absolutex,absolutey,700)
             // goldGraph(absolutex,absolutey,7)
             // energyGraph(absolutex,absolutey,7)
+            // #endregion
             
             // #region rect
             // graphics.fillStyle(colorPlatte[colorfight.game_map[i][j].owner],alphaAttack(colorfight.game_map[i][j].attack_cost))
@@ -205,6 +221,26 @@ function test(){
 function timer(colorfight){
     $('#timer').text('Turn: '+colorfight.turn)
 }
+
+function resourceGraph(x,y,value){
+    console.log(x,y)
+    let angle=value/20*360
+    let endAngle=-90+angle
+    // hpRadius(x,y,-90,(-90+angle),'0xb71c1c')
+    graphics.lineStyle(2, '0x673AB7', 1);
+    graphics.beginPath();
+    graphics.arc(x,y,r, Phaser.Math.DegToRad(-90), Phaser.Math.DegToRad(endAngle), false);
+    graphics.strokePath();    
+    //blue filed force
+}
+
+function resourceRender(x,y,value){
+
+    var c = new Phaser.Geom.Circle(x,y,1.8*r);
+    // shadow(startx+(position[0])*r*interval,10+(position[1])*r*interval,c)
+    graphics.fillStyle("0xfff9c4",value/20*90).fillCircleShape(c)
+}
+
 
 //left bottom red/green
 function naturalCost(x,y,value){
