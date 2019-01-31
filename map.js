@@ -167,12 +167,16 @@ function draw(colorfight){
             let gold=colorfight.game_map[i][j].gold
             let energy=colorfight.game_map[i][j].energy
             let attack=natural+field
+            let random=Math.floor(Math.random() * colorPlatte.length)
 
             //0xff5722
-            graphics.lineStyle(2.5*attack/1000,  colorPlatte[Math.floor(Math.random() * colorPlatte.length)],1);
+            graphics.lineStyle(2.5*attack/1000,  colorPlatte[random],1);
             graphics.beginPath();
             graphics.arc(absolutex,absolutey,((r-2)*attack/1000)+2, Phaser.Math.DegToRad(0), Phaser.Math.DegToRad(360), false);
             graphics.strokePath();    
+
+            var c = new Phaser.Geom.Circle(absolutex,absolutey,((r-2)*attack/1000)+2);
+            graphics.fillStyle(colorPlatte[random],attack/1000*100).fillCircleShape(c)
 
             // var c = new Phaser.Geom.Circle(absolutex,absolutey,r);
             // graphics.fillStyle(colorPlatte[colorfight.game_map[i][j].owner],alphaAttack(colorfight.game_map[i][j].attack_cost)).fillCircleShape(c)
