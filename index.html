@@ -9,6 +9,7 @@
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -16,21 +17,33 @@
     
 </head>
 <body style="background-color: #FFFFFF">
+    <!--# region dropdown content -->
+    <ul id="dropdown1" class="dropdown-content">
+            <li><a href="#!" class="black-text">Map 1</a></li>
+            <li><a href="#!" class="black-text">Map 2</a></li>
+          </ul>
+          <!-- #endregion -->
     <nav class="grey lighten-4">
         <div class="nav-wrapper">
+            <ul class="right"> 
+                <li class="green lighten-3"><a href=""><i class="material-icons">refresh</i></a></li>
+                <li class="green lighten-3"><a class="dropdown-trigger" href="#!" data-target="dropdown1"><i class="material-icons">more_vert</i></a></li>
+
+
+            </ul>
             <div class="row">
                 <div class="col">
-                    <a href="#" class="brand-logo blue-grey-text text-lighten-2">Color Fight</a>
+                    <h5 class="blue-grey-text text-lighten-3">Color Fight</h5>
+                    <!-- <a href="#" class="blue-grey-text text-lighten-2">Color Fight</a> -->
                 </div>
             <!-- <div class="row"><p></p></div> -->
-            <div class="row">
-                <div class="col offset-s1">
+                <div class="col">
                     <p class="blue-text text-darken-1" id="timer">Turn</p>
-                </div>
             </div>
+            </div>
+
         </div>
            <!-- <span class=" grey-text darken-4 valign-wrapper "><h5 class="nav-text">Color Fight</h5></span> -->
-        </div>
     </nav>
     <div class="container">
         <div id='game' class="card-panel" >

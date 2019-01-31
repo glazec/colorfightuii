@@ -11,6 +11,9 @@ var ws
 const bg="#FFFFFF"
 var colorfight
 
+//trigger dropdown
+$(".dropdown-trigger").dropdown(hover=false);
+
 // fill color of the rect: different color,different alph
 // round color of the rect
 // the width of strone line
