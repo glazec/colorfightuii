@@ -166,11 +166,17 @@ function draw(colorfight){
             let natural=colorfight.game_map[i][j].natural_cost
             let gold=colorfight.game_map[i][j].gold
             let energy=colorfight.game_map[i][j].energy
+            let attack=natural+field
 
-            var c = new Phaser.Geom.Circle(absolutex,absolutey,r);
-            // shadow(startx+(position[0])*r*interval,10+(position[1])*r*interval,c)
-            graphics.fillStyle(colorPlatte[colorfight.game_map[i][j].owner],alphaAttack(colorfight.game_map[i][j].attack_cost)).fillCircleShape(c)
-            // resourceGraph(absolutex,absolutey,energy+gold)
+            //0xff5722
+            graphics.lineStyle(2.5*attack/1000,  colorPlatte[Math.floor(Math.random() * colorPlatte.length)],1);
+            graphics.beginPath();
+            graphics.arc(absolutex,absolutey,((r-2)*attack/1000)+2, Phaser.Math.DegToRad(0), Phaser.Math.DegToRad(360), false);
+            graphics.strokePath();    
+
+            // var c = new Phaser.Geom.Circle(absolutex,absolutey,r);
+            // graphics.fillStyle(colorPlatte[colorfight.game_map[i][j].owner],alphaAttack(colorfight.game_map[i][j].attack_cost)).fillCircleShape(c)
+
             // #region deprecated graph
             // naturalCost(absolutex,absolutey,natural)
             // fieldCost(absolutex,absolutey,field)
@@ -222,24 +228,13 @@ function timer(colorfight){
     $('#timer').text('Turn: '+colorfight.turn)
 }
 
-function resourceGraph(x,y,value){
-    console.log(x,y)
-    let angle=value/20*360
-    let endAngle=-90+angle
-    // hpRadius(x,y,-90,(-90+angle),'0xb71c1c')
-    graphics.lineStyle(2, '0x673AB7', 1);
-    graphics.beginPath();
-    graphics.arc(x,y,r, Phaser.Math.DegToRad(-90), Phaser.Math.DegToRad(endAngle), false);
-    graphics.strokePath();    
-    //blue filed force
-}
 
 function resourceRender(x,y,value){
 
     // var c = new Phaser.Geom.Circle(x,y,2*r);
     // graphics.fillStyle("0xfff9c4",value/20*90).fillCircleShape(c)
     var c = new Phaser.Geom.Rectangle(x-(r*interval)/2,y-(r*interval)/2,r*interval,r*interval)
-    graphics.fillStyle('0xfff9c4',value/20*90)
+    graphics.fillStyle('0x9e9e9e ',value/20*90)
     graphics.fillRectShape(c)
 
 
