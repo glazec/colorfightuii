@@ -1,11 +1,11 @@
 const colorPlatte=['0x00097a7','0xb0bec5','0xdd2c00','0xffd600','0xffab00','0xff6d00','0xaeea00','0x64dd17','#00c853']; //700
 const goldColor=['0xfffde7','0xfff9c4','0xfff59d','0xfff176','0xffee58','0xffeb3b','0xfdd835','0xfbc02d','0xf9a825','0xf57f17']
 const energyColor = []
-const r = 8
+const r = 5
 const grid =29
 const startx=20 //larger than r
 const starty=30 //larger than 2*r
-const interval=2.5 //must larger than2
+const interval=3 //must larger than2
 var graphics
 var ws
 const bg="#FFFFFF"
@@ -236,9 +236,13 @@ function resourceGraph(x,y,value){
 
 function resourceRender(x,y,value){
 
-    var c = new Phaser.Geom.Circle(x,y,1.8*r);
-    // shadow(startx+(position[0])*r*interval,10+(position[1])*r*interval,c)
-    graphics.fillStyle("0xfff9c4",value/20*90).fillCircleShape(c)
+    // var c = new Phaser.Geom.Circle(x,y,2*r);
+    // graphics.fillStyle("0xfff9c4",value/20*90).fillCircleShape(c)
+    var c = new Phaser.Geom.Rectangle(x-(r*interval)/2,y-(r*interval)/2,r*interval,r*interval)
+    graphics.fillStyle('0xfff9c4',value/20*90)
+    graphics.fillRectShape(c)
+
+
 }
 
 
